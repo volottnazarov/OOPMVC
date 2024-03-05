@@ -9,15 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentGroupService {
+    private StudentGroup studentGroup;
 
-    public StudentGroup createGroup(Teacher teacher, Student... students){
-        List<Student> studentList = new ArrayList<>();
-        for (Student student : students) {
-            if (student instanceof Student)
-                studentList.add(student);
-        }
-        return new StudentGroup(teacher, studentList);
+    public void createGroup(Teacher teacher, List<Student> students){
+        this.studentGroup = new StudentGroup(teacher, students);
+
     }
 
+    public StudentGroup getStudentGroup() {
+        return studentGroup;
+    }
 
+    @Override
+    public String toString() {
+        return "StudentGroupService{" +
+                "studentGroup = " + studentGroup +
+                '}';
+    }
 }

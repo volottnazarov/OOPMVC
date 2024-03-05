@@ -6,6 +6,7 @@ import Model.Teacher;
 import Model.Type;
 import Service.DataService;
 import Service.StudentGroupService;
+import View.StudentGroupView;
 import View.StudentView;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Controller {
     private final DataService service = new DataService();
     private final StudentView view = new StudentView();
     private final StudentGroupService studentGroupService = new StudentGroupService();
+    private final StudentGroupView studentGroupView = new StudentGroupView();
     public Student createStudent(String firstName, String secondName, String lastName){
          service.create(firstName, secondName, lastName, Type.STUDENT);
          return (Student) service.getStudents();
@@ -27,8 +29,12 @@ public class Controller {
         }
     }
 
-    public StudentGroup createGroup(Teacher teacher, Student... students) {
-        return studentGroupService.createGroup(teacher, students);
+    public void createGroup(StudentGroup studentGroup) {
+        studentGroupService.createGroup(studentGroup.getTeacher(),studentGroup.getStudents());
+    }
+    public void printGroup(StudentGroup studentGroup){
+        studentGroupView.printStudentGroupView(studentGroupService.getStudentGroup());
+
     }
 
 }
